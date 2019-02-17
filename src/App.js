@@ -1,17 +1,35 @@
-import React, { useState } from "react";
-import { TextField } from "@material-ui/core";
+import React, { Component } from "react";
+import { BrowserRouter } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
-function App() {
-  const [url, setURL] = useState("");
-  return (
-    <div>
-      <TextField
-        value={url}
-        label="URL"
-        onChange={e => setURL(e.target.value)}
-      />
-    </div>
+import { observeAuthState } from "./state/asyncActionCreators";
+import Routes from "./Routes";
+
+class App extends Component {
+  componentDidMount() {
+    this.props.observeAuthState();
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
+    );
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      observeAuthState
+    },
+    dispatch
   );
 }
 
-export default App;
+export default connect(
+  null,
+  mapDispatchToProps
+)(App);
