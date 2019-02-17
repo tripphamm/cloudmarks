@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -11,7 +10,15 @@ class Home extends Component {
     return (
       <div>
         <h1>Home</h1>
-        <Link to="/addBookmark">New</Link>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => {
+            this.props.history.push("/addBookmark");
+          }}
+        >
+          Add Bookmark
+        </Button>
         <div style={{ marginTop: 40 }}>
           <Button
             variant="contained"

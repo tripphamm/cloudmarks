@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import { TextField } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
 
-export default function AddBookmark() {
+export default function AddBookmark(props) {
   const [url, setURL] = useState("");
   const [title, setTitle] = useState("");
 
   return (
     <div>
-      <Link to="/">Home</Link>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={() => {
+          props.history.push("/");
+        }}
+      >
+        Home
+      </Button>
       <div>
         <TextField
           value={title}
