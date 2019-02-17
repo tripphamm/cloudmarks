@@ -8,7 +8,13 @@ import { logInUserViaGoogle } from "../state/asyncActionCreators";
 class SignIn extends Component {
   render() {
     return (
-      <Button onClick={this.props.logInUserViaGoogle}>LOG IN GOOGLE</Button>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={this.props.logInUserViaGoogle}
+      >
+        LOG IN GOOGLE
+      </Button>
     );
   }
 }
