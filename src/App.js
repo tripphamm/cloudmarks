@@ -1,9 +1,17 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import { TextField } from "@material-ui/core";
 
-class App extends Component {
-  render() {
-    return <div />;
-  }
+function App() {
+  const [url, setURL] = useState("");
+  return (
+    <div>
+      <TextField
+        value={url}
+        label="URL"
+        onChange={e => setURL(e.target.value)}
+      />
+    </div>
+  );
 }
 
 export default App;
