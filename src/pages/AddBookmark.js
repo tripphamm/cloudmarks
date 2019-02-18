@@ -31,6 +31,15 @@ export default function AddBookmark(props) {
           onChange={e => setURL(e.target.value)}
         />
       </div>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => {
+          console.log("submit");
+        }}
+      >
+        Submit
+      </Button>
     </div>
   );
 }
