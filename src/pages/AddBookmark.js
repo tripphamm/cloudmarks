@@ -18,7 +18,7 @@ export default function AddBookmark(props) {
         title,
         url
       })
-    );
+    ).then(() => props.history.push("/"));
 
   return (
     <div>
