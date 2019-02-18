@@ -91,7 +91,7 @@ export function createAddBookmarkAsyncAction(bookmark) {
           [`${bookmark.id}`]: bookmark
         });
 
-      createAddBookmarkSuccessAction(bookmark);
+      dispatch(createAddBookmarkSuccessAction(bookmark));
     } catch (error) {
       dispatch(createAddBookmarkFailureAction(error));
     }
