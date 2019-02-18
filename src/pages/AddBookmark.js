@@ -11,13 +11,14 @@ export default function AddBookmark(props) {
   const [title, setTitle] = useState("");
   const dispatch = useDispatch();
 
-  const addBookmark = dispatch(
-    createAddBookmarkAsyncAction({
-      id: uuidv4(),
-      title,
-      url
-    })
-  );
+  const addBookmark = () =>
+    dispatch(
+      createAddBookmarkAsyncAction({
+        id: uuidv4(),
+        title,
+        url
+      })
+    );
 
   return (
     <div>
