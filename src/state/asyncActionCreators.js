@@ -85,7 +85,7 @@ export function createAddBookmarkAsyncAction(bookmark) {
     try {
       await firestore
         .collection("users")
-        .doc(`${user.uid}`)
+        .doc(`${user.id}`)
         .collection("bookmarks")
         .add({
           [`${bookmark.id}`]: bookmark
