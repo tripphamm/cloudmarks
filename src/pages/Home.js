@@ -1,48 +1,33 @@
-import React, { Component } from "react";
+import React from "react";
 import { Button } from "@material-ui/core";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 
-import { logOutUser } from "../state/asyncActionCreators";
+import { logOutUser as createLogOutUserAsyncAction } from "../state/asyncActionCreators";
+import { useDispatch } from "redux-react-hook";
 
-class Home extends Component {
-  render() {
-    return (
-      <div>
-        <h1>Home</h1>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={() => {
-            this.props.history.push("/addBookmark");
-          }}
-        >
-          Add Bookmark
+export default function Home(props) {
+  const dispatch = useDispatch();
+
+  const logOutUser = () => {
+    dispatch(createLogOutUserAsyncAction());
+  };
+
+  return (
+    <div>
+      <h1>Home</h1>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={() => {
+          props.history.push("/addBookmark");
+        }}
+      >
+        Add Bookmark
+      </Button>
+      <div style={{ marginTop: 40 }}>
+        <Button variant="contained" color="primary" onClick={logOutUser}>
+          Log out
         </Button>
-        <div style={{ marginTop: 40 }}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={this.props.logOutUser}
-          >
-            Log out
-          </Button>
-        </div>
       </div>
-    );
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    {
-      logOutUser
-    },
-    dispatch
+    </div>
   );
 }
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(Home);

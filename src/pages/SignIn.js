@@ -1,34 +1,19 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import React from "react";
 import { Button } from "@material-ui/core";
+import { useDispatch } from "redux-react-hook";
 
-import { logInUserViaGoogle } from "../state/asyncActionCreators";
+import { logInUserViaGoogle as createLogInUserViaGoogleAsyncAction } from "../state/asyncActionCreators";
 
-class SignIn extends Component {
-  render() {
-    return (
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={this.props.logInUserViaGoogle}
-      >
-        LOG IN GOOGLE
-      </Button>
-    );
-  }
-}
+export default function SignIn() {
+  const dispatch = useDispatch();
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    {
-      logInUserViaGoogle
-    },
-    dispatch
+  const logInUserViaGoogle = () => {
+    dispatch(createLogInUserViaGoogleAsyncAction());
+  };
+
+  return (
+    <Button variant="contained" color="primary" onClick={logInUserViaGoogle}>
+      LOG IN GOOGLE
+    </Button>
   );
 }
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(SignIn);

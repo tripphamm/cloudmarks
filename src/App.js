@@ -1,35 +1,24 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import { useDispatch } from "redux-react-hook";
 
-import { observeAuthState } from "./state/asyncActionCreators";
+import {
+  observeAuthState as createObserveAuthStateAsyncAction,
+  unobserveAuthState as createUnobserveAuthStateAsyncAction
+} from "./state/asyncActionCreators";
 import Routes from "./Routes";
 
-class App extends Component {
-  componentDidMount() {
-    this.props.observeAuthState();
-  }
+export default function App() {
+  const dispatch = useDispatch();
 
-  render() {
-    return (
-      <BrowserRouter>
-        <Routes />
-      </BrowserRouter>
-    );
-  }
-}
+  useEffect(() => {
+    dispatch(createObserveAuthStateAsyncAction());
+    return () => dispatch(createUnobserveAuthStateAsyncAction());
+  }, []);
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    {
-      observeAuthState
-    },
-    dispatch
+  return (
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
   );
 }
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(App);

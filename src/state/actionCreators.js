@@ -19,3 +19,23 @@ export function clearSetUserErrorActionCreator() {
     type: actionTypes.CLEAR_SET_USER_ERROR
   };
 }
+
+export function createAddBookmarkSuccessAction(bookmark) {
+  return {
+    type: actionTypes.ADD_BOOKMARK_SUCCESS,
+    bookmark
+  };
+}
+
+export function createAddBookmarkFailureAction(error) {
+  return {
+    type: actionTypes.ADD_BOOKMARK_FAILURE,
+    error
+  };
+}
+
+export function createClearAddBookmarkErrorAction() {
+  return {
+    type: actionTypes.CLEAR_ADD_BOOKMARK_ERROR
+  };
+}
