@@ -69,7 +69,7 @@ export function logOutUser() {
   };
 }
 
-export function addBookmark(bookmark) {
+export function createAddBookmarkAsyncAction(bookmark) {
   return async (dispatch, getState) => {
     const globalStateSnapshot = getState();
 
