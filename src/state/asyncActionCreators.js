@@ -1,7 +1,9 @@
-import { auth, googleAuthProvider } from "../firebaseProvider";
+import { auth, firestore, googleAuthProvider } from "../firebaseProvider";
 import {
   setUserFailureActionCreator,
-  setUserSuccessActionCreator
+  setUserSuccessActionCreator,
+  createAddBookmarkSuccessAction,
+  createAddBookmarkFailureAction
 } from "./actionCreators";
 
 let unobserveAuthStateChanged = null;
@@ -64,5 +66,34 @@ export function logOutUser() {
 
     await auth.signOut();
     // should trigger onAuthStateChanged in observeAuthState which will toggleAuthenticating(false)
+  };
+}
+
+export function addBookmark(bookmark) {
+  return async (dispatch, getState) => {
+    const globalStateSnapshot = getState();
+
+    const { user } = globalStateSnapshot;
+
+    if (!user) {
+      dispatch(
+        createAddBookmarkFailureAction(new Error("User is not logged in"))
+      );
+      return;
+    }
+
+    try {
+      await firestore
+        .collection("users")
+        .doc(`${user.uid}`)
+        .collection("bookmarks")
+        .add({
+          [`${bookmark.id}`]: bookmark
+        });
+
+      createAddBookmarkSuccessAction(bookmark);
+    } catch (error) {
+      dispatch(createAddBookmarkFailureAction(error));
+    }
   };
 }
